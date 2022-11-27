@@ -6,10 +6,6 @@ A video sharing website
 
 [https://a-tube.vercel.app/](https://a-tube.vercel.app/)
 
-### Back-end:
-
-[https://github.com/an678-mhg/Youtube-clone-server](https://github.com/an678-mhg/Youtube-clone-server)
-
 ### Features
 
 - Sign-In, Sign-Up
