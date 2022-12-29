@@ -96,7 +96,7 @@ const DetailsVideo = () => {
               src={video?.videoUrl}
               color="#EF4444"
               controls
-              className="w-full h-full object-cover"
+              className="w-full h-full"
             />
           )}
         </div>
