@@ -82,7 +82,11 @@ const getVideoById = async (req, res) => {
       })
         .populate("writer")
         .limit(3),
-      Video.find().skip(skipDocument).sort("-createdAt").limit(3),
+      Video.find()
+        .skip(skipDocument)
+        .sort("-createdAt")
+        .populate("writer")
+        .limit(3),
     ]);
 
     return res.json({
