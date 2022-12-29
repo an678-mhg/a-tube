@@ -3,7 +3,7 @@ import React from "react";
 const SkeletonCard = () => {
   return (
     <div>
-      <div className="aspect-[16/9] bg-[#222] rounded-sm">
+      <div className="aspect-[16/9] bg-[#222] rounded-md">
         <div className="h-full skeleton"></div>
         <div className="p-4 flex items-start justify-between h-[124px]">
           <div className="w-[35px] h-[35px] rounded-full overflow-hidden mt-1 skeleton"></div>
