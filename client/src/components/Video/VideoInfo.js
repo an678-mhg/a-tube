@@ -84,30 +84,32 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
             {calculateCreatedTime(video?.createdAt)}
           </p>
         </div>
-        <div className="flex items-center mt-4 md:mt-0">
-          <button
-            className="flex items-center justify-center p-2"
-            onClick={handleLike}
-          >
-            <i
-              className={`text-2xl ${isLike ? "bx bxs-like" : "bx bx-like"}`}
-            />
-            <span className="ml-1 text-sm">{likeCount}</span>
-          </button>
-          <button
-            onClick={handleDisLike}
-            className={`flex items-center justify-center p-2`}
-          >
-            <i
-              className={`text-2xl ${
-                isDisLike ? `bx bxs-dislike` : `bx bx-dislike`
-              }`}
-            ></i>
-            <span className="ml-1 text-sm">{disLikeCount}</span>
-          </button>
+        <div className="flex items-center md:mt-0 mt-3">
+          <div className="bg-[#ffffff1a] flex items-center rounded-full relative after:absolute after:translate-x-[-50%] after:translate-y-[-50%] after:w-[1px] after:h-[20px] after:top-[50%] after:left-[50%] after:bg-white">
+            <button
+              className="flex items-center justify-center py-1 px-4"
+              onClick={handleLike}
+            >
+              <i
+                className={`text-2xl ${isLike ? "bx bxs-like" : "bx bx-like"}`}
+              />
+              <span className="ml-1 text-sm">{likeCount}</span>
+            </button>
+            <button
+              onClick={handleDisLike}
+              className={`flex items-center justify-center py-1 px-4`}
+            >
+              <i
+                className={`text-2xl ${
+                  isDisLike ? `bx bxs-dislike` : `bx bx-dislike`
+                }`}
+              ></i>
+              <span className="ml-1 text-sm">{disLikeCount}</span>
+            </button>
+          </div>
           <button
             disabled={loading}
-            className={`flex items-center justify-center p-2 ${
+            className={`flex items-center justify-center py-1 px-4 bg-[#ffffff1a] ml-1.5 rounded-full ${
               loading ? "cursor-not-allowed" : "cursor-pointer"
             }`}
             onClick={handleAddVideoFavourite}
@@ -119,7 +121,7 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
                   : "bx bx-list-plus"
               } text-2xl`}
             ></i>
-            <span className="ml-1 text-sm">Add playlist</span>
+            <span className="ml-1 text-sm lg:block hidden">Add playlist</span>
           </button>
         </div>
       </div>

@@ -47,7 +47,7 @@ const CommentItem = ({ data, deleteComment }) => {
             dangerouslySetInnerHTML={{
               __html: parseLinkDescription(data?.content),
             }}
-            className="text-sm font-thin mt-4"
+            className="text-sm font-thin mt-2"
           />
         </div>
         {currentUser?._id === data?.userId?._id && (

@@ -36,7 +36,7 @@ const Header = ({ setShowMenu }) => {
   }, []);
 
   return (
-    <div className="flex justify-between items-center text-white py-2 relative px-4 lg:bg-transparent bg-[#222]">
+    <div className="flex justify-between items-center text-white py-2 relative px-4 lg:bg-transparent bg-[#333]">
       <div className="flex items-center justify-center">
         <i
           onClick={() => setShowMenu(true)}
@@ -51,16 +51,16 @@ const Header = ({ setShowMenu }) => {
           navigate(
             `/search?type=${searchParams.get("type") || "video"}&q=${text}`
           );
-          setText("");
+          setShowSearch(false);
         }}
         onClick={(e) => e.stopPropagation()}
-        className={`items-center justify-center py-1 w-[500px] ${
-          showSearch ? "top-[40px] px-4" : "top-[-100px]"
+        className={`items-center rounded-full overflow-hidden justify-center w-[500px] ${
+          showSearch ? "top-[50px] shadow-md" : "top-[-100px]"
         } fixed max-w-full left-0 flex md:static transition-all z-[9999]`}
       >
         <input
           value={text}
-          className="text-white bg-[#333] flex-1 outline-none py-1 px-3 h-[30px]"
+          className="text-white bg-[#222] flex-1 outline-none py-1 pl-4 h-[30px]"
           type="text"
           placeholder="Tìm kiếm"
           onChange={(e) => onChangeForm(e)}

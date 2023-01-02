@@ -29,7 +29,7 @@ const InputComment = ({ addComment }) => {
   };
 
   return (
-    <div className="mt-8 rounded-md overflow-hidden">
+    <div className="mt-8">
       {currentUser ? (
         <form
           onSubmit={(e) =>
@@ -48,14 +48,14 @@ const InputComment = ({ addComment }) => {
           />
           <input
             type="text"
-            className="py-2 pl-12 w-full bg-transparent outline-none text-[14px] placeholder:text-[14px]"
+            className="py-2 pl-12 flex-1 w-full bg-transparent outline-none text-[14px] placeholder:text-[14px]"
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Cảm nhận của bạn về video..."
           />
           <button
             disabled={loading}
-            className={`text-[14px] py-2 px-5 text-white right-[1px] absolute ${
+            className={`text-[14px] py-2 px-5 text-white ${
               loading ? "cursor-not-allowed" : "cursor-pointer"
             }`}
           >

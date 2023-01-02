@@ -20,6 +20,7 @@ import { getCommentApi } from "../api/commentApi";
 import CommentList from "../components/Comment/CommentList";
 import { descViewApi } from "../api/videoApi";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const DetailsVideo = () => {
   const { video, loading, videoRecomment, likeCount, disLikeCount, error } =
@@ -37,6 +38,16 @@ const DetailsVideo = () => {
     const newListComment = commentList.filter((p) => p._id !== id);
     setCommentList(newListComment);
   };
+
+  useEffect(() => {
+    return () => {
+      if (document.pictureInPictureElement) {
+        document
+          .exitPictureInPicture()
+          .catch(() => toast.error("Có lỗi xảy ra!"));
+      }
+    };
+  }, []);
 
   useEffect(() => {
     (async (videoId) => {
@@ -85,7 +96,7 @@ const DetailsVideo = () => {
   if (error) return <PageNotFound />;
 
   return (
-    <div className="text-white flex md:flex-row flex-col mb-10">
+    <div className="text-white flex md:flex-row flex-col">
       <Title
         title={`${video?.title || "ATube - Video sharing website"} | ATube`}
       />

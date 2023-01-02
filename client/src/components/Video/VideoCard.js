@@ -45,7 +45,7 @@ const VideoCard = ({ data, edit }) => {
             </button>
           </div>
         )}
-        <div className="p-4 flex items-start justify-between">
+        <div className="px-2 py-3 flex items-start justify-between">
           <Link
             to={`/channel/${data?.writer?._id}`}
             className="w-[35px] h-[35px] rounded-full overflow-hidden block"
@@ -56,14 +56,14 @@ const VideoCard = ({ data, edit }) => {
               src={data?.writer?.avatar}
             />
           </Link>
-          <div className="ml-5 flex-1 flex flex-col items-start justify-start">
+          <div className="ml-2 flex-1 flex flex-col items-start justify-start">
             <Link to={`/details/${data?._id}`}>
-              <p className="text-[14px] hover:underline font-semibold line-clamp-2">
+              <p className="text-[14px] hover:underline font-semibold line-clamp-1">
                 {data?.title}
               </p>
             </Link>
             <div>
-              <p className="text-xs text-gray-300 mt-2">{data?.writer?.name}</p>
+              <p className="text-xs text-gray-300 mt-1">{data?.writer?.name}</p>
               <div className="flex items-center mt-1">
                 <p className="text-xs text-gray-100 flex items-center">
                   {data?.totalView} lượt xem{" "}

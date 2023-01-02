@@ -46,7 +46,7 @@ const VideoInfoWriter = ({ video }) => {
   if (error) return <PageNotFound />;
 
   return (
-    <div className="border-t border-b pb-4">
+    <div className="border-t border-[#999] mt-2 border-b pb-4">
       <div className="py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
@@ -75,9 +75,11 @@ const VideoInfoWriter = ({ video }) => {
           {currentUser?._id !== video?.writer?._id && (
             <>
               <button
-                className={`py-2 px-3 ${
-                  isSubsrciption ? "bg-[#ffffff1a]" : "bg-red-500"
-                } rounded-sm ${
+                className={`py-2 text-sm px-6 ${
+                  isSubsrciption
+                    ? "bg-[#ffffff1a] text-white"
+                    : "bg-[#f1f1f1] text-black"
+                } rounded-full ${
                   isCheck ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
                 onClick={handleSubsrciption}

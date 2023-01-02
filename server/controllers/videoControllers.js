@@ -65,34 +65,29 @@ const getVideoById = async (req, res) => {
   const _id = req.params.id;
 
   try {
-    const video = await Video.findOne({ _id }).populate("writer");
+    const totalVideo = await Video.countDocuments();
 
     function getRandomArbitrary(min, max) {
       return Math.ceil(Math.random() * (max - min) + min);
     }
 
-    const skipDocument = getRandomArbitrary(1, 5);
+    const skipDocument = getRandomArbitrary(0, totalVideo);
 
-    const [like, dislike, videSameAuthor, videoRandom] = await Promise.all([
+    const [like, dislike, videoRandom, video] = await Promise.all([
       Like.find({ videoId: _id }),
       Dislike.find({ videoId: _id }),
-      Video.find({
-        writer: video.writer,
-        _id: { $ne: video._id },
-      })
-        .populate("writer")
-        .limit(3),
       Video.find()
         .populate("writer")
         .skip(skipDocument)
         .sort("-createdAt")
-        .limit(3),
+        .limit(10),
+      Video.findOne({ _id }).populate("writer"),
     ]);
 
     return res.json({
       success: true,
       video,
-      videoRecomment: [...videSameAuthor, ...videoRandom],
+      videoRecomment: videoRandom,
       likeCount: like.length,
       disLikeCount: dislike.length,
     });
