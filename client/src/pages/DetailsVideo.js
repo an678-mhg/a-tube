@@ -25,6 +25,7 @@ import VideoPlayer from "../components/Video/VideoPlayer";
 const DetailsVideo = () => {
   const { video, loading, videoRecomment, likeCount, disLikeCount, error } =
     useSelector((state) => state.video);
+  const { currentTime } = useSelector((state) => state.miniature);
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -92,14 +93,12 @@ const DetailsVideo = () => {
       />
       <div className="w-full md:w-[60%]">
         {video?.videoUrl && (
-          <div className="w-full aspect-video bg-[#111]">
-            <video
-              controls
-              autoPlay
-              className="w-full h-full"
-              src={video?.videoUrl}
-            />
-          </div>
+          <VideoPlayer
+            currentTimeOut={currentTime}
+            videoId={video?._id}
+            url={video?.videoUrl}
+            nextVideoId={videoRecomment[0]._id}
+          />
         )}
 
         <VideoInfo
@@ -111,7 +110,7 @@ const DetailsVideo = () => {
         <InputComment addComment={addComment} />
         <CommentList deleteComment={deleteComment} commentList={commentList} />
       </div>
-      <div className="flex-1 md:ml-5 pt-5 md:pt-0 overflow-auto">
+      <div className="flex-1 md:ml-5 pt-8 md:pt-0 overflow-auto">
         {videoRecomment.length > 1 ? (
           videoRecomment
             ?.filter((p) => p._id !== id)

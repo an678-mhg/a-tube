@@ -8,10 +8,14 @@ import SignInPage from "./pages/Auth/SignInPage";
 import SignUpPage from "./pages/Auth/SignUpPage";
 import { addUser, logOut } from "./redux/slice/authSlice";
 import setAuthToken from "./utils/setAuthToken";
+import VideoPlayer from "./components/Video/VideoPlayer";
 
 function App() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.auth);
+  const { isShow, currentTime, videoUrl, nextVideoId } = useSelector(
+    (state) => state.miniature
+  );
 
   const location = useLocation();
 
@@ -40,13 +44,24 @@ function App() {
   if (typeof currentUser === "undefined") return <Loading />;
 
   return (
-    <>
+    <div>
       <Routes>
         <Route path="/*" element={<ClientPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
       </Routes>
-    </>
+
+      {isShow && (
+        <div className="fixed w-[300px] text-white bottom-0 right-0 m-4">
+          <VideoPlayer
+            isMini={true}
+            currentTimeOut={currentTime}
+            url={videoUrl}
+            nextVideoId={nextVideoId}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 

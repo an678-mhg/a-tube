@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NavbarUser from "./NavbarUser";
@@ -7,7 +7,7 @@ import { useSearchParams } from "../../hooks/useSearchParms";
 
 const Header = ({ setShowMenu }) => {
   const { currentUser } = useSelector((state) => state.auth);
-  const timeoutRef = useRef();
+  // const timeoutRef = useRef();
   const navigate = useNavigate();
   const searchParams = useSearchParams();
   const [text, setText] = useState("");
@@ -17,15 +17,15 @@ const Header = ({ setShowMenu }) => {
     const value = e.target.value;
     setText(value);
 
-    if (!value.trim()) return;
+    // if (!value.trim()) return;
 
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    // if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-    timeoutRef.current = setTimeout(() => {
-      navigate(
-        `/search?type=${searchParams.get("type") || "video"}&q=${value}`
-      );
-    }, 300);
+    // timeoutRef.current = setTimeout(() => {
+    //   navigate(
+    //     `/search?type=${searchParams.get("type") || "video"}&q=${value}`
+    //   );
+    // }, 300);
   };
 
   useEffect(() => {
@@ -54,18 +54,24 @@ const Header = ({ setShowMenu }) => {
           setShowSearch(false);
         }}
         onClick={(e) => e.stopPropagation()}
-        className={`items-center rounded-full overflow-hidden justify-center w-[500px] ${
-          showSearch ? "top-[50px] shadow-md" : "top-[-100px]"
+        className={`items-center md:rounded-full overflow-hidden justify-center w-[500px] ${
+          showSearch ? "top-0 shadow-md" : "top-[-100px]"
         } fixed max-w-full left-0 flex md:static transition-all z-[9999]`}
       >
+        {showSearch && (
+          <div
+            onClick={() => setShowSearch(false)}
+            className="md:hidden overlay-search block fixed left-0 right-0 bottom-0 top-[44px] bg-[#00000099]"
+          />
+        )}
         <input
           value={text}
-          className="text-white bg-[#222] flex-1 outline-none py-1 pl-4 h-[30px]"
+          className="text-white bg-[#222] flex-1 outline-none py-1 pl-4 h-[44px] md:h-[30px]"
           type="text"
           placeholder="Tìm kiếm"
           onChange={(e) => onChangeForm(e)}
         />
-        <button className="px-3 bg-red-500 w-[45px] h-[30px] flex items-center">
+        <button className="px-3 bg-red-500 w-[45px] md:h-[30px] h-[44px] flex items-center">
           <i className="text-xl bx bx-search"></i>
         </button>
       </form>

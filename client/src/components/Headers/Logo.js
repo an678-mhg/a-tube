@@ -6,7 +6,7 @@ const Logo = ({ setShowMenu }) => {
     <div className="py-1 text-white pl-4">
       <div className="flex items-center justify-between">
         <Link className="flex items-center text-[20px] font-semibold" to="/">
-          <i className="text-4xl text-red-500 mr-1 bx bxl-youtube"></i>
+          <i className="text-4xl text-red-500 mr-2 rounded bx bxl-youtube"></i>
           ATube
         </Link>
 
