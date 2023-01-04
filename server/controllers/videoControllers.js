@@ -71,7 +71,7 @@ const getVideoById = async (req, res) => {
       return Math.ceil(Math.random() * (max - min) + min);
     }
 
-    const skipDocument = getRandomArbitrary(0, totalVideo);
+    const skipDocument = getRandomArbitrary(0, totalVideo - 10);
 
     const [like, dislike, videoRandom, video] = await Promise.all([
       Like.find({ videoId: _id }),
@@ -80,7 +80,8 @@ const getVideoById = async (req, res) => {
         .populate("writer")
         .skip(skipDocument)
         .sort("-createdAt")
-        .limit(10),
+        .limit(10)
+        .sort("-createdAt"),
       Video.findOne({ _id }).populate("writer"),
     ]);
 

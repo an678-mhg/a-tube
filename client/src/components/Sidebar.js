@@ -37,7 +37,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bx-home-alt mr-4"></i> Trang chủ
+          <i className="text-[20px] bx bx-home-alt mr-3"></i> Trang chủ
         </NavLink>
       </li>
       <li>
@@ -46,7 +46,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/trending"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bxs-hot mr-4"></i> Thịnh hành
+          <i className="text-[20px] bx bxs-hot mr-3"></i> Thịnh hành
         </NavLink>
       </li>
       <li>
@@ -55,7 +55,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/subsrciptions"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bxs-videos mr-4"></i> Đã đăng ký
+          <i className="text-[20px] bx bxs-videos mr-3"></i> Đã đăng ký
         </NavLink>
       </li>
       <div className="w-full h-[1px] bg-[#ccc] my-4 opacity-10"></div>
@@ -66,7 +66,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/favouites"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bx-movie-play mr-4"></i>Video yêu thích
+          <i className="text-[20px] bx bx-movie-play mr-3"></i>Video yêu thích
         </NavLink>
       </li>
       <li>
@@ -75,7 +75,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/history"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bx-history mr-4"></i> Video đã xem
+          <i className="text-[20px] bx bx-history mr-3"></i> Video đã xem
         </NavLink>
       </li>
       <li>
@@ -84,7 +84,7 @@ const Sidebar = ({ setShowMenu }) => {
           to="/liked-video"
           className="text-white p-2 text-[16px] flex items-center"
         >
-          <i className="text-[20px] bx bx-like mr-4"></i> Video đã thích
+          <i className="text-[20px] bx bx-like mr-3"></i> Video đã thích
         </NavLink>
       </li>
       {currentUser && (
@@ -96,7 +96,7 @@ const Sidebar = ({ setShowMenu }) => {
             }}
           >
             <button className="text-white p-2 text-[16px] flex items-center">
-              <i className="bx bx-log-in-circle text-[20px] mr-4"></i> Đăng xuất
+              <i className="bx bx-log-in-circle text-[20px] mr-3"></i> Đăng xuất
             </button>
           </li>
           <div className="w-full h-[1px] bg-[#ccc] my-4 opacity-10"></div>

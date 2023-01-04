@@ -14,7 +14,7 @@ const ChannelItem = ({ data }) => {
           lazy_src={data?.channelId?.avatar}
         />
       </div>
-      <div className="ml-5">
+      <div className="ml-3">
         <p className="text-[15px] font-semibold">{data?.channelId?.name}</p>
       </div>
     </Link>

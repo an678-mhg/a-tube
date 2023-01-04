@@ -40,14 +40,14 @@ const CommentItem = ({ data, deleteComment }) => {
       <div className="flex-1 ml-2 overflow-hidden flex items-center justify-between bg-[#242526] py-2 px-3 rounded-md">
         <div className="flex-1 overflow-hidden">
           <div className="flex items-center text-xs text-[#999]">
-            <p className="text-white">{data?.userId?.name}</p>
+            <p className="text-white font-bold">{data?.userId?.name}</p>
             <p className="ml-2">{calculateCreatedTime(data?.createdAt)}</p>
           </div>
           <p
             dangerouslySetInnerHTML={{
               __html: parseLinkDescription(data?.content),
             }}
-            className="text-sm font-thin mt-2"
+            className="text-sm font-normal mt-2"
           />
         </div>
         {currentUser?._id === data?.userId?._id && (

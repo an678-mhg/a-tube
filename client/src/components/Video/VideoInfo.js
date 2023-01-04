@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import {
   addVideoFavourite,
+  deleteVideoFavourite,
   getVideoFavourite,
 } from "../../redux/slice/videoFavouriteSlice";
 import {
@@ -61,9 +62,19 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
   const handleAddVideoFavourite = () => {
     if (!currentUser) return setShowModal(true);
     const check = videos.some((p) => p._id === video?._id);
-    if (check) return toast.error("Video đã tồn tại trong danh sách!");
+    if (check) {
+      const confirm = window.confirm(
+        "Bạn muốn xóa video này ra khỏi danh sách yêu thích!"
+      );
+      if (confirm) {
+        dispatch(deleteVideoFavourite(video?._id));
+        toast.success("Video đã được xóa khỏi danh sách!");
+        return;
+      }
+      return;
+    }
     dispatch(addVideoFavourite(video));
-    toast.success("Thêm thành công rồi đó !");
+    toast.success("Video đã được thêm vào danh sách!");
   };
 
   if (error) return <PageNotFound />;
@@ -121,7 +132,6 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
                   : "bx bx-list-plus"
               } text-2xl`}
             ></i>
-            <span className="ml-1 text-sm lg:block hidden">Add playlist</span>
           </button>
         </div>
       </div>

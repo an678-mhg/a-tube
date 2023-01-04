@@ -9,5 +9,5 @@ export const getVideoFavouriteApi = () => {
 };
 
 export const deleteVideoFavouriteApi = (videoId) => {
-  return axiosClient.get(`/api/favourite/${videoId}`);
+  return axiosClient.delete(`/api/favourite/${videoId}`);
 };

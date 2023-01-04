@@ -20,7 +20,7 @@ import { getCommentApi } from "../api/commentApi";
 import CommentList from "../components/Comment/CommentList";
 import { descViewApi } from "../api/videoApi";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import VideoPlayer from "../components/Video/VideoPlayer";
 
 const DetailsVideo = () => {
   const { video, loading, videoRecomment, likeCount, disLikeCount, error } =
@@ -38,16 +38,6 @@ const DetailsVideo = () => {
     const newListComment = commentList.filter((p) => p._id !== id);
     setCommentList(newListComment);
   };
-
-  useEffect(() => {
-    return () => {
-      if (document.pictureInPictureElement) {
-        document
-          .exitPictureInPicture()
-          .catch(() => toast.error("Có lỗi xảy ra!"));
-      }
-    };
-  }, []);
 
   useEffect(() => {
     (async (videoId) => {
@@ -101,16 +91,17 @@ const DetailsVideo = () => {
         title={`${video?.title || "ATube - Video sharing website"} | ATube`}
       />
       <div className="w-full md:w-[60%]">
-        <div className="w-full aspect-[16/9] bg-black">
-          {video?.videoUrl && (
+        {video?.videoUrl && (
+          <div className="w-full aspect-video bg-[#111]">
             <video
-              src={video?.videoUrl}
-              color="#EF4444"
               controls
+              autoPlay
               className="w-full h-full"
+              src={video?.videoUrl}
             />
-          )}
-        </div>
+          </div>
+        )}
+
         <VideoInfo
           likeCount={likeCount}
           disLikeCount={disLikeCount}

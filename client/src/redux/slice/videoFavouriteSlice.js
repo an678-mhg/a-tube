@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   addVideoFavouriteApi,
+  deleteVideoFavouriteApi,
   getVideoFavouriteApi,
 } from "../../api/videoFavouriteApi";
 
@@ -23,6 +24,14 @@ export const getVideoFavourite = createAsyncThunk(
   async () => {
     const res = await getVideoFavouriteApi();
     return res.data;
+  }
+);
+
+export const deleteVideoFavourite = createAsyncThunk(
+  "favourite/deleteVideo",
+  async (videoId) => {
+    await deleteVideoFavouriteApi(videoId);
+    return videoId;
   }
 );
 
@@ -52,6 +61,19 @@ const videoFavouriteSlice = createSlice({
     builder.addCase(getVideoFavourite.fulfilled, (state, action) => {
       state.loading = false;
       state.videos = action.payload.videos;
+    });
+    builder.addCase(deleteVideoFavourite.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteVideoFavourite.fulfilled, (state, action) => {
+      state.loading = false;
+      state.videos = state.videos?.filter(
+        (item) => item._id !== action.payload
+      );
+    });
+    builder.addCase(deleteVideoFavourite.rejected, (state) => {
+      state.loading = false;
+      state.error = true;
     });
   },
 });

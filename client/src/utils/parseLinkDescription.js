@@ -6,7 +6,7 @@ export const parseLinkDescription = (text) => {
     ?.split(" ")
     ?.map((item) => {
       if (item.match(urlExpression)) {
-        return `<a style="color: #4292FF" target="_blank" href=${item}>${item}</a>`;
+        return `<a class="hover:underline text-blue-500" target="_blank" href=${item}>${item}</a>`;
       }
       return item;
     })

@@ -59,7 +59,7 @@ const InputComment = ({ addComment }) => {
               loading ? "cursor-not-allowed" : "cursor-pointer"
             }`}
           >
-            {loading ? "Loading..." : "Gửi"}
+            {loading ? "Đang gửi" : "Gửi"}
           </button>
         </form>
       ) : (

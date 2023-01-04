@@ -20,7 +20,7 @@ const VideoCardRow = ({ data }) => {
       </div>
       <div className="px-2 h-full flex-1">
         <p className="text-[14px] font-semibold line-clamp-1">{data?.title}</p>
-        <p className="text-xs font-medium mt-2 text-[#999] line-clamp-1">
+        <p className="text-xs font-bold mt-1 text-[#999] line-clamp-1">
           {data?.writer?.name}
         </p>
         <div className="mt-1 text-[#999]">
