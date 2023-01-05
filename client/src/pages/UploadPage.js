@@ -3,7 +3,6 @@ import { cloudinaryUrl } from "../utils/cloudinaryApi";
 import axios from "axios";
 import { uploadVideoApi } from "../api/videoApi";
 import { toast } from "react-toastify";
-import Loading from "../components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Shared/Title";
 import { useSelector } from "react-redux";
@@ -12,7 +11,6 @@ import WantLogin from "../components/Shared/WantLogin";
 const UploadPage = () => {
   const [file, setFile] = useState();
   const [previewVideo, setPreviewVideo] = useState();
-  const [progress, setProgress] = useState(0);
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -46,23 +44,28 @@ const UploadPage = () => {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+
     if (!data.title.trim() || !data.description.trim())
       return toast.error("Không được để trống các trường!");
     if (data.title.trim().length > 100)
-      return toast.error("Tiêu đề video không được dài quá 76 kí tự!");
+      return toast.error("Tiêu đề video không được dài quá 100 kí tự!");
     if (!file) return toast.error("Bạn chưa chọn video nào!");
+
     URL.revokeObjectURL(previewVideo);
+
     try {
       setLoading(true);
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", process.env.REACT_APP_UPLOAD_KEY);
 
+      const toastId = toast.loading("Upload...", { position: "bottom-right" });
+
       const res = await axios.post(cloudinaryUrl, formData, {
         onUploadProgress: (p) => {
           const { loaded, total } = p;
           let percent = Math.floor((loaded * 100) / total);
-          setProgress(percent);
+          toast.loading(`Upload video ${percent}`, { toastId: toastId });
         },
       });
 
@@ -70,9 +73,13 @@ const UploadPage = () => {
         ...data,
         videoUrl: res.data.url,
       };
+
       const uploadVideo = await uploadVideoApi(newVideo);
+
+      toast.dismiss(toastId);
+
       if (uploadVideo.data.success) {
-        navigate("/");
+        navigate(`/details/${uploadVideo.data.video?._id}`);
         toast.success(uploadVideo.data.message);
       }
     } catch (error) {
@@ -135,13 +142,14 @@ const UploadPage = () => {
                 />
               </div>
               <div className="my-4">
-                <button className="px-3 py-2 bg-blue-500 rounded-sm text-white w-full">
+                <button
+                  disabled={loading}
+                  className="px-3 py-2 bg-blue-500 rounded-sm text-white w-full"
+                >
                   Tải lên video
                 </button>
               </div>
             </div>
-
-            {loading && <Loading progress={progress} />}
           </form>
         </>
       ) : (

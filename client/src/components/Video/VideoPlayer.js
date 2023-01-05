@@ -8,6 +8,7 @@ import {
   openMiniaturePlayer,
 } from "../../redux/slice/miniaturePlayerSlice";
 import formatVideoTime from "../../utils/formatVideoTime";
+import { CgMiniPlayer } from "react-icons/cg";
 
 const VideoPlayer = ({ url, nextVideoId, currentTimeOut, isMini, videoId }) => {
   const [muted, setMuted] = useState(false);
@@ -235,6 +236,8 @@ const VideoPlayer = ({ url, nextVideoId, currentTimeOut, isMini, videoId }) => {
         onLoadedMetadata={() => setLoading(true)}
         onLoadedData={() => setLoading(true)}
         onLoad={() => setLoading(true)}
+        onLoadCapture={() => setLoading(true)}
+        onLoadStart={() => setLoading(true)}
         autoPlay
         muted={muted}
         src={url}
@@ -274,27 +277,31 @@ const VideoPlayer = ({ url, nextVideoId, currentTimeOut, isMini, videoId }) => {
       )}
 
       <div className="absolute controls inset-0 transition-colors bg-[#00000099] flex flex-col">
-        <div className="flex-1 flex items-center justify-between mx-4 relative">
-          <button disabled className="opacity-50">
-            <i className="text-[36px] bx bx-skip-previous"></i>
-          </button>
-          <button onClick={handlePlayPause}>
-            {!loading && (
-              <i className={`text-[50px] bx bx-${play ? "pause" : "play"}`}></i>
-            )}
-          </button>
-          <button onClick={handleNextVideo}>
-            <i className="text-[36px] bx bx-skip-next"></i>
-          </button>
+        <div className="flex-1 mx-4 relative">
+          <div className="flex items-center justify-between mx-4 h-full">
+            <button disabled className="opacity-50">
+              <i className="text-[36px] bx bx-skip-previous"></i>
+            </button>
+            <button onClick={handlePlayPause}>
+              {!loading && (
+                <i
+                  className={`text-[50px] bx bx-${play ? "pause" : "play"}`}
+                ></i>
+              )}
+            </button>
+            <button onClick={handleNextVideo}>
+              <i className="text-[36px] bx bx-skip-next"></i>
+            </button>
+          </div>
 
           <div className="absolute bottom-0 w-full">
             {!isMini && (
-              <div className="flex items-center justify-between w-full mb-1">
+              <div className="flex items-center justify-between w-full md:mb-1">
                 <p className="font-bold text-xs">
                   {formatVideoTime(currentTime)} /{" "}
                   {formatVideoTime(videoRef?.current?.duration)}
                 </p>
-                <div className="space-x-2">
+                <div className="space-x-2 flex items-center">
                   {/* <button className="text-white h-[16px]">
                   <i className="bx bxs-cog"></i>
                 </button> */}
@@ -302,7 +309,7 @@ const VideoPlayer = ({ url, nextVideoId, currentTimeOut, isMini, videoId }) => {
                     onClick={handleOpenMiniaturePlayer}
                     className="text-white"
                   >
-                    <i className="bx bx-minus-back text-lg"></i>
+                    <CgMiniPlayer className="text-[18px]" />
                   </button>
                   <button
                     onClick={handleToggleFullScreen}
@@ -320,7 +327,7 @@ const VideoPlayer = ({ url, nextVideoId, currentTimeOut, isMini, videoId }) => {
             <div
               ref={progressRef}
               onClick={handleSeekTime}
-              className="w-full py-3 relative cursor-pointer mb-2"
+              className="w-full py-3 relative cursor-pointer md:mb-2"
             >
               <div className="h-[3px] w-full bg-gray-500 relative rounded overflow-hidden">
                 <div
