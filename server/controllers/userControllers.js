@@ -36,7 +36,8 @@ const registerUser = async (req, res) => {
         userId: newUser._id,
         roleId: newUser.roleId,
       },
-      process.env.PASSJWT
+      process.env.PASSJWT,
+      { expiresIn: "12h" }
     );
 
     return res.status(203).json({
@@ -83,7 +84,8 @@ const loginUser = async (req, res) => {
         userId: findUser._id,
         roleId: findUser.roleId,
       },
-      process.env.PASSJWT
+      process.env.PASSJWT,
+      { expiresIn: "12h" }
     );
 
     return res.status(200).json({
