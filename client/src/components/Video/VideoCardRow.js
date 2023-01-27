@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { calculateCreatedTime } from "../../utils/formatDate";
+import ImageFade from "../Shared/ImgFade";
 import ImgFade from "../Shared/ImgFade";
 
 const VideoCardRow = ({ data }) => {
@@ -20,8 +21,13 @@ const VideoCardRow = ({ data }) => {
       </div>
       <div className="px-2 h-full flex-1">
         <p className="text-[14px] font-semibold line-clamp-1">{data?.title}</p>
-        <p className="text-xs font-bold mt-1 text-[#999] line-clamp-1">
-          {data?.writer?.name}
+        <p className="text-xs font-bold mt-1 text-[#999] flex items-center">
+          <ImageFade
+            alt={data?.writer?.name}
+            className="w-[20px] h-[20px] object-cover rounded-full"
+            lazy_src={data?.writer?.avatar}
+          />
+          <span className="line-clamp-1 flex-1 ml-1">{data?.writer?.name}</span>
         </p>
         <div className="mt-1 text-[#999]">
           <p className="text-xs flex items-center">

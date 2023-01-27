@@ -50,10 +50,10 @@ const VideoCard = ({ data, edit }) => {
             to={`/channel/${data?.writer?._id}`}
             className="w-[35px] h-[35px] rounded-full overflow-hidden block"
           >
-            <img
+            <ImageFade
               alt={data?.writer?.name}
               className="w-full h-full object-cover"
-              src={data?.writer?.avatar}
+              lazy_src={data?.writer?.avatar}
             />
           </Link>
           <div className="ml-3 flex-1 flex flex-col items-start justify-start">
