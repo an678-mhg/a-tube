@@ -20,12 +20,10 @@ import { getCommentApi } from "../api/commentApi";
 import CommentList from "../components/Comment/CommentList";
 import { descViewApi } from "../api/videoApi";
 import { useParams } from "react-router-dom";
-import VideoPlayer from "../components/Video/VideoPlayer";
 
 const DetailsVideo = () => {
   const { video, loading, videoRecomment, likeCount, disLikeCount, error } =
     useSelector((state) => state.video);
-  const { currentTime } = useSelector((state) => state.miniature);
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -93,11 +91,11 @@ const DetailsVideo = () => {
       />
       <div className="w-full md:w-[60%]">
         {video?.videoUrl && (
-          <VideoPlayer
-            currentTimeOut={currentTime}
-            videoId={video?._id}
-            url={video?.videoUrl}
-            nextVideoId={videoRecomment[0]._id}
+          <video
+            src={video?.videoUrl}
+            controls
+            className="w-full aspect-video"
+            poster={video?.videoUrl?.split(".mp4")[0] + ".jpg"}
           />
         )}
 

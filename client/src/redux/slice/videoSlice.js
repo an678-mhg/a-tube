@@ -18,6 +18,8 @@ const initialState = {
   isLike: false,
   isDisLike: false,
   error: false,
+  isCheckLike: false,
+  isCheckDisLike: false,
 };
 
 export const getVideoById = createAsyncThunk("video/getById", async (id) => {
@@ -107,8 +109,12 @@ const videoSlice = createSlice({
       state.isLike = false;
       state.error = true;
     });
+    builder.addCase(checkLike.pending, (state) => {
+      state.isCheckLike = true;
+    });
     builder.addCase(checkLike.fulfilled, (state, action) => {
       state.isLike = action.payload.isLike;
+      state.isCheckLike = false;
     });
     builder.addCase(checkLike.rejected, (state) => {
       state.isLike = false;
@@ -133,8 +139,12 @@ const videoSlice = createSlice({
     builder.addCase(disLikeVideo.rejected, (state) => {
       state.error = true;
     });
+    builder.addCase(checkDisLikeVideo.pending, (state) => {
+      state.isCheckDisLike = true;
+    });
     builder.addCase(checkDisLikeVideo.fulfilled, (state, action) => {
       state.isDisLike = action.payload.isDisLike;
+      state.isCheckDisLike = false;
     });
     builder.addCase(checkDisLikeVideo.rejected, (state) => {
       state.isDisLike = false;

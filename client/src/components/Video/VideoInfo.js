@@ -18,7 +18,9 @@ import PageNotFound from "../../pages/PageNotFound";
 import { calculateCreatedTime } from "../../utils/formatDate";
 
 const VideoInfo = ({ video, likeCount, disLikeCount }) => {
-  const { isLike, isDisLike } = useSelector((state) => state.video);
+  const { isLike, isDisLike, isCheckLike, isCheckDisLike } = useSelector(
+    (state) => state.video
+  );
   const { currentUser } = useSelector((state) => state.auth);
   const { videos, loading, error } = useSelector((state) => state.favourite);
   const [showModal, setShowModal] = useState(false);
@@ -98,6 +100,7 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
         <div className="flex items-center md:mt-0 mt-3">
           <div className="bg-[#ffffff1a] flex items-center rounded-full relative after:absolute after:translate-x-[-50%] after:translate-y-[-50%] after:w-[1px] after:h-[20px] after:top-[50%] after:left-[50%] after:bg-white">
             <button
+              disabled={isCheckLike}
               className="flex items-center justify-center py-1 px-4"
               onClick={handleLike}
             >
@@ -107,6 +110,7 @@ const VideoInfo = ({ video, likeCount, disLikeCount }) => {
               <span className="ml-1 text-sm">{likeCount}</span>
             </button>
             <button
+              disabled={isCheckDisLike}
               onClick={handleDisLike}
               className={`flex items-center justify-center py-1 px-4`}
             >
